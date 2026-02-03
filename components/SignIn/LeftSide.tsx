@@ -5,9 +5,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Image from "next/image"
 
-export default function LeftSide() {
+export default function LeftSide({ className }: { className?: string }) {
   return (
-    <div className="w-full space-y-8 pb-8">
+    <div className={`relative z-10 space-y-8 pb-8 ${className}`}>
       <div className="space-y-2">
         <h1 className="text-[26px] font-bold tracking-tight text-gray-900 leading-tight">
           Welcome Back<br />PULSE !
