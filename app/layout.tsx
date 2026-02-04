@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Titillium_Web, Lato } from "next/font/google";
 
 
 const geistSans = Geist({
@@ -11,6 +11,18 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const titilliumWeb = Titillium_Web({
+  weight: ["200", "300", "400", "600", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-titillium-web",
+});
+
+const lato = Lato({
+  weight: ["100", "300", "400", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-lato",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${titilliumWeb.variable} ${lato.variable} antialiased`}
         suppressHydrationWarning={true}
       >
         {children}

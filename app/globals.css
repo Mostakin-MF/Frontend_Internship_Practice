@@ -55,6 +55,8 @@
   /* Fonts */
   --font-display: "Mona Sans", sans-serif;
   --font-body: "Inter", sans-serif;
+  --font-titillium: var(--font-titillium-web);
+  --font-lato: var(--font-lato);
 }
 
 /* -----------------------------------------
@@ -85,10 +87,12 @@
   --input: #ffffff;
   --ring: #f3cd0e;
 
-  --radius: 0.75rem; /* 12px from Figma */
+  --radius: 0.75rem;
+  /* 12px from Figma */
 
   /* Status colors */
-  --success: #30b5bf; /* success/info */
+  --success: #30b5bf;
+  /* success/info */
   --success-foreground: #ffffff;
 
   --warning: #ec7b35;
