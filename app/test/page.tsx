@@ -1,3 +1,5 @@
+"use client";
+
 import GlowCircle from "@/components/SignIn/circle_glow";
 import LeftSide from "@/components/SignIn/LeftSide";
 import RightSide from "@/components/SignIn/Rightside";
@@ -6,7 +8,9 @@ export default function Page() {
   return (
     <>
       <div className="flex min-h-screen">
-        {/* Left side */}
+
+        <iframe className = "border border-gray-300 w-full h-screen" src="https://embed.figma.com/proto/J275LFLundql2h581b3fPP/Redesign-of-Track-of-Vehicle---Website?node-id=1709-4372&starting-point-node-id=1709%3A4372&scaling=scale-down-width&content-scaling=fixed&embed-host=share"></iframe>
+        {/* Left sides
         <div className="flex justify-center items-center relative min-h-screen w-full lg:w-1/2 bg-primary-200 text-white rounded-4xl md:flex-col overflow-visible">
           <GlowCircle
             size={200}
@@ -20,10 +24,10 @@ export default function Page() {
         <LeftSide className="w-[360px]" />
         </div>
 
-        {/* Right side */}
+        {/* Right side 
         <div className="flex justify-center items-center min-h-screen w-full lg:w-1/2 bg-orange-500 text-white rounded-3xl md:flex-col">
           <RightSide />
-        </div>
+        </div> */}
       </div>
     </>
 

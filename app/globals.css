@@ -147,3 +147,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes conic-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-conic {
+  animation: conic-spin 3s linear infinite;
+}

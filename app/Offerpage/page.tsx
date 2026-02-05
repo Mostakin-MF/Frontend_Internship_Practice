@@ -11,15 +11,16 @@ export default function Offerpage() {
 
             {/* 2. Countdown Timer Section */}
             <div className="flex gap-4 mb-8">
-                <Card title="Days" value={1} />
-                <Card title="Hours" value={21} />
-                <Card title="Minutes" value={52} />
-                <Card title="Seconds" value={20} />
+                {/* Staggered delays for the "start from different corner" effect */}
+                <Card title="Days" value={1} delay="0s" />
+                <Card title="Hours" value={21} delay="-0.75s" />
+                <Card title="Minutes" value={52} delay="-1.5s" />
+                <Card title="Seconds" value={20} delay="-2.25s" />
             </div>
 
             {/* 3. Headline Text Section */}
             <div className="w-full max-w-[760px] flex items-center justify-center text-center mb-16 px-4">
-                <h1 className="text-white font-lato font-semibold text-[32px] md:text-[42px] leading-tight md:leading-[54px] tracking-tight md:tracking-[-0.02em] text-center">
+                <h1 className="text-white font-lato font-semibold text-[54px] md:text-[42px] leading-tight md:leading-[54px] tracking-tight md:tracking-[-0.02em] text-center" style={{ letterSpacing: '-0.02em' }}>
                     Discover the best GPS tracking offer <br className="hidden md:block" />
                     in Bangladesh
                 </h1>
