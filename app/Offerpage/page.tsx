@@ -19,7 +19,7 @@ export default function Offerpage() {
             </div>
 
             {/* 3. Headline Text Section */}
-            <div className="w-full max-w-[760px] flex items-center justify-center text-center mb-16 px-4">
+            <div className="w-full flex items-center justify-center text-center">
                 <h1 className="text-white font-lato font-semibold text-[54px] md:text-[42px] leading-tight md:leading-[54px] tracking-tight md:tracking-[-0.02em] text-center" style={{ letterSpacing: '-0.02em' }}>
                     Discover the best GPS tracking offer <br className="hidden md:block" />
                     in Bangladesh
@@ -34,21 +34,9 @@ export default function Offerpage() {
                     <OfferTicketPlaceholder />
                     <OfferTicketPlaceholder />
                 </div>
-
-                {/* Navigation Buttons */}
-                <div className="flex gap-4 mt-8">
-                    <button className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-white hover:bg-white/10 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                        </svg>
-                    </button>
-                    <button className="w-10 h-10 rounded-full bg-[#FFC107] flex items-center justify-center text-black hover:bg-[#FFD54F] transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                        </svg>
-                    </button>
-                </div>
             </div>
+
+
         </div>
     );
 }

@@ -8,7 +8,7 @@ const ConicBorder = ({ delay = "0s" }: { delay?: string }) => {
                 <div
                     className="w-full h-full animate-conic"
                     style={{
-                        background: `conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 100deg, #FDD10E 160deg, #F36B24 270deg, #FDD10E 330deg, transparent 360deg)`,
+                        background: `conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 100deg, #F36B24 160deg, #FDD10E 270deg, #F36B24 330deg, transparent 360deg)`,
                         
                         animationDelay: delay
                     }}
