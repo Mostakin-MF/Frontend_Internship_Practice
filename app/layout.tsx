@@ -1,7 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Titillium_Web, Lato } from "next/font/google";
+import { Geist, Geist_Mono, Titillium_Web, Lato, Inter } from "next/font/google";
 
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
+})
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${titilliumWeb.variable} ${lato.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${titilliumWeb.variable} ${lato.variable} ${inter.variable} antialiased`}
         suppressHydrationWarning={true}
       >
         {children}
