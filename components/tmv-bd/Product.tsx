@@ -2,20 +2,20 @@ import { Plus } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 
-export default function Product({}) {
+export default function Product({ }) {
     return (
-        <div className="flex flex-col w-84 bg-[#F6F5EE] rounded-2xl overflow-hidden shadow-sm font-sans">
+        <div className="flex flex-col w-full max-w-[21rem] mx-auto h-auto min-h-[518px] bg-[#F6F5EE] rounded-2xl overflow-hidden shadow-sm font-sans">
             <div className="relative w-full h-51.75 bg-[#F6F5EE] flex items-center justify-center pt-8">
                 <Image
                     src="/ppp.png"
                     alt="Product"
                     width={336}
                     height={207}
-                    className="object-contain"
+                    className="object-contain w-full h-auto"
                 />
             </div>
 
-            <div className="flex flex-col px-6 pt-4 pb-6 gap-6">
+            <div className="flex flex-col px-3 sm:px-6 pt-4 pb-6 gap-6">
                 {/* Product Info */}
                 <div className="space-y-1">
                     <h3 className="text-xl text-black font-semibold font-inter">VTS Regular</h3>
@@ -25,7 +25,7 @@ export default function Product({}) {
                 </div>
 
                 {/* Pricing Options */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 sm:gap-2">
                     <div className="flex flex-col h-12 w-16 justify-center text-sm font-medium">
                         <span className="text-secondary text-sm">Device</span>
                         <span className="text-black font-medium text-[10px]">5,000 BDT</span>
@@ -36,14 +36,14 @@ export default function Product({}) {
                     </div>
 
                     <ProductCardButton
-                        className="h-12 w-24 text-xs font-medium border-primary bg-primary shadow-sm"
+                        className="h-12 flex-1 text-xs font-medium border-primary bg-primary shadow-sm"
                         isActive={false}
                     >
                         <span className="text-black font-bold text-sm">6 Months</span>
                         <span className="text-black font-medium text-[10px]">+2,500 BDT</span>
                     </ProductCardButton>
 
-                    <ProductCardButton className="h-12 w-24 text-xs font-medium bg-white" isActive={false}>
+                    <ProductCardButton className="h-12 flex-1 text-xs font-medium bg-white" isActive={false}>
                         <span className="text-black font-bold text-sm">12 Months</span>
                         <span className="text-gray-400 font-medium text-[10px]">+5,000 BDT</span>
                     </ProductCardButton>
