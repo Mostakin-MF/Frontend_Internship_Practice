@@ -9,7 +9,7 @@ export default function ProductSection() {
                         Find the right solution
                     </h2>
                     <p className="text-lg md:text-xl text-gray-600 font-lato">
-                        Explore products designed to power your fleet's success.
+                        Explore products designed to power your fleet&apos;s success.
                     </p>
                 </div>
 
