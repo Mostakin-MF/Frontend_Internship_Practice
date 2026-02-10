@@ -5,6 +5,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@source "../node_modules/@heroui";
+@plugin "../components/heroui-plugin";
+
+
 /* Custom dark variant used by shadcn/ui */
 @custom-variant dark (&:is(.dark *));
 

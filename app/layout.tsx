@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Providers } from "./providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Titillium_Web, Lato, Inter } from "next/font/google";
 
@@ -46,7 +47,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${titilliumWeb.variable} ${lato.variable} ${inter.variable} antialiased`}
         suppressHydrationWarning={true}
       >
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
