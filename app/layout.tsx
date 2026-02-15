@@ -2,6 +2,8 @@ import "./globals.css";
 import { Providers } from "./providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Titillium_Web, Lato, Inter } from "next/font/google";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -50,6 +52,7 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+        <ToastContainer />
       </body>
     </html>
   );

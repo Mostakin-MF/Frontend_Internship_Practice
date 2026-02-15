@@ -1,6 +1,7 @@
 {
   "name": "Frontend_Internship_Practice",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev --port 5000",
@@ -24,6 +25,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-icons": "^5.5.0",
+    "react-toastify": "^11.0.5",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
