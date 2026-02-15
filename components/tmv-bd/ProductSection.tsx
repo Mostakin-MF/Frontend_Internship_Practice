@@ -1,14 +1,17 @@
+"use client";
 import Product from "./Product";
+import { useTheme } from "@/app/tmv-bd/ThemeContext";
 
 export default function ProductSection() {
+    const { theme } = useTheme();
     return (
-        <section className="w-full py-20 bg-white">
+        <section className={`w-full py-20 ${theme === 'dark' ? 'bg-gray-500' : 'bg-white'}`}>
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col items-center text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 font-titillium">
+                    <h2 className={`text-4xl md:text-5xl font-bold mb-4 font-titillium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                         Find the right solution
                     </h2>
-                    <p className="text-lg md:text-xl text-gray-600 font-lato">
+                    <p className={`text-lg md:text-xl font-lato ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                         Explore products designed to power your fleet&apos;s success.
                     </p>
                 </div>

@@ -3,15 +3,15 @@ import Image from "next/image";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#F6F5EE] text-[#1D1D1D] px-4 md:px-10 py-12 font-inter">
+        <footer className="bg-[#F6F5EE] text-[#1D1D1D] px-4 md:px-10 py-12 font-inter dark:bg-slate-700 dark:text-white">
             <div className="max-w-310 mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
                 {/* Left Section - Logo, Address, Socials */}
                 <div className="md:col-span-4 flex flex-col items-start gap-6">
                     <Image src="/Logo.png" alt="Track My Vehicle Logo" width={100} height={100} className="w-[100px] h-[100px] object-contain" />
 
                     <div className="space-y-2">
-                        <h3 className="text-[18px] font-bold text-[#1D1D1D] leading-5.5">Head Office</h3>
-                        <p className="text-[#4A5E6D] text-[15px] leading-6 font-normal max-w-75">
+                        <h3 className="text-[18px] font-bold text-[#1D1D1D] leading-5.5 dark:text-white">Head Office</h3>
+                        <p className="text-[#4A5E6D] text-[15px] leading-6 font-normal max-w-75 dark:text-white">
                             138/1, Level, 4 Bir Uttam Mir Shawkat Sarak, Dhaka 1208
                         </p>
                     </div>
@@ -28,7 +28,7 @@ export default function Footer() {
                 {/* Middle Section - Quick Links & More */}
                 <div className="md:col-span-4 flex justify-start gap-10 md:justify-start md:gap-24">
                     <div className="flex flex-col gap-6">
-                        <h3 className="text-[16px] font-bold text-[#4A5E6D]">Quick links</h3>
+                        <h3 className="text-[16px] font-bold text-[#4A5E6D] dark:text-white">Quick links</h3>
                         <ul className="space-y-3">
                             {["Shop", "About", "Contact", "Support", "Policies"].map((item) => (
                                 <li key={item}>
@@ -39,7 +39,7 @@ export default function Footer() {
                     </div>
 
                     <div className="flex flex-col gap-6">
-                        <h3 className="text-[16px] font-bold text-[#4A5E6D] uppercase">MORE</h3>
+                        <h3 className="text-[16px] font-bold text-[#4A5E6D] uppercase dark:text-white">MORE</h3>
                         <ul className="space-y-3">
                             {["Legal Text", "Privacy Notice", "FAQ"].map((item) => (
                                 <li key={item}>

@@ -7,7 +7,7 @@ export default function Navbar() {
       {/* Navbar */}
       <nav className="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <div className="text-2xl font-bold text-gray-900">
+        <div className="text-2xl font-bold text-gray-900 dark:text-white">
           MyCompany
         </div>
 
