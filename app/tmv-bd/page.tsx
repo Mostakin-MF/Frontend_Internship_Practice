@@ -1,6 +1,6 @@
 import Footer from "@/components/tmv-bd/Footer";
 import Header from "@/components/tmv-bd/Header";
-import Navbar from "@/components/tmv-bd/Nabvar";
+import Navbar from "@/components/tmv-bd/Navbar";
 import Product from "@/components/tmv-bd/Product";
 import ProductSection from "@/components/tmv-bd/ProductSection";
 import { ThemeProvider } from "./ThemeContext";
@@ -15,8 +15,12 @@ function TMVBDPage() {
                 <div className="fixed bottom-4 right-4 z-50">
                     <ThemeToggle />
                 </div>
-                <Navbar />
-                <Header />
+                <div className="relative">
+                    <div className="absolute top-0 left-0 right-0 z-50">
+                        <Navbar />
+                    </div>
+                    <Header />
+                </div>
                 <ProductSection />
                 <Footer />
             </main>
