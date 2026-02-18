@@ -5,6 +5,7 @@ import Product from "@/components/tmv-bd/Product";
 import ProductSection from "@/components/tmv-bd/ProductSection";
 import { ThemeProvider } from "./ThemeContext";
 import ThemeToggle from "@/components/tmv-bd/ThemeToggle";
+import PlatformInfo from "@/components/tmv-bd/platformInfo";
 
 
 function TMVBDPage() {
@@ -22,6 +23,7 @@ function TMVBDPage() {
                     <Header />
                 </div>
                 <ProductSection />
+                <PlatformInfo />
                 <Footer />
             </main>
         </ThemeProvider>

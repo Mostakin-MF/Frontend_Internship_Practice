@@ -5,7 +5,7 @@ export default function Header() {
     <header className="w-full bg-white shadow-sm">
 
       {/* Hero Section */}
-      <section className="bg-gray-100 min-h-screen/60 flex items-center dark:bg-slate-600 dark:text-white">
+      <section className="bg-gray-100 min-h-screen flex items-center dark:bg-slate-600 dark:text-white">
         <div className="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between gap-12">
 
           {/* LEFT CONTENT */}
@@ -18,7 +18,7 @@ export default function Header() {
                 alt="Preferred Choice of #1 Brands"
                 width={160}
                 height={160}
-                className="w-36 lg:w-40 h-auto"
+                className="w-30 h-30 lg:w-40 lg:h-40 h-auto"
               />
             </div>
 
