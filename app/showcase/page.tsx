@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
   Zap,
   Layers,
@@ -12,7 +10,6 @@ import {
   MapPin,
   Palette,
   Lightbulb,
-  Layout,
   ShoppingBag,
   ListOrdered,
   TrendingUp,
@@ -23,8 +20,14 @@ import {
   Grid3x3,
   Sparkles,
   ArrowRight,
+  Eye,
+  X,
+  ExternalLink,
+  Maximize2,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useCallback } from "react";
+import { Button } from "@/components/ui/button";
 
 interface Project {
   title: string;
@@ -38,287 +41,275 @@ interface Project {
 const projects: Project[] = [
   {
     title: "Animated Buttons",
-    description: "Custom animated button components with various hover effects and transitions. Showcases CSS and interactive button design patterns.",
+    description: "Custom animated button components with various hover effects and transitions.",
     path: "/animated_button_demo",
-    icon: <Zap className="w-6 h-6" />,
-    tags: ["CSS", "Animation", "Components"],
+    icon: <Zap className="w-4 h-4" />,
+    tags: ["CSS", "Animation"],
     featured: true,
   },
   {
     title: "Basic Animation",
-    description: "Tailwind CSS animation utilities including spin, ping, pulse, and bounce effects. Great for learning animation basics.",
+    description: "Tailwind CSS animation utilities including spin, ping, pulse, and bounce effects.",
     path: "/animation",
-    icon: <Sparkles className="w-6 h-6" />,
-    tags: ["Tailwind CSS", "Animation"],
+    icon: <Sparkles className="w-4 h-4" />,
+    tags: ["Tailwind", "Animation"],
   },
   {
     title: "Dashboard Layout",
-    description: "Professional dashboard with sidebar navigation and header. Features responsive layout using shadcn/ui components.",
+    description: "Professional dashboard with sidebar navigation and header.",
     path: "/dashboard",
-    icon: <BarChart3 className="w-6 h-6" />,
-    tags: ["Sidebar", "Layout", "Navigation"],
+    icon: <BarChart3 className="w-4 h-4" />,
+    tags: ["Sidebar", "Layout"],
     featured: true,
   },
   {
     title: "Discord Sidebar",
-    description: "Discord-inspired sidebar component with channel navigation and user menu. Perfect for communication app UIs.",
+    description: "Discord-inspired sidebar component with channel navigation.",
     path: "/Discord_sidebar",
-    icon: <MessageSquare className="w-6 h-6" />,
-    tags: ["Components", "UI Design", "Navigation"],
+    icon: <MessageSquare className="w-4 h-4" />,
+    tags: ["UI Design", "Navigation"],
   },
   {
     title: "Editor-X",
-    description: "Advanced text editor implementation with plugin system and rich editing capabilities.",
+    description: "Advanced text editor with plugin system and rich editing capabilities.",
     path: "/editor-x",
-    icon: <Edit3 className="w-6 h-6" />,
-    tags: ["Editor", "Plugins", "Complex Components"],
+    icon: <Edit3 className="w-4 h-4" />,
+    tags: ["Editor", "Plugins"],
     featured: true,
   },
   {
     title: "Interactive Map",
-    description: "Google Map integration showcasing map-based UI components and location features.",
+    description: "Google Map integration showcasing map-based UI components.",
     path: "/map",
-    icon: <MapPin className="w-6 h-6" />,
-    tags: ["Maps", "Third-party Integration"],
+    icon: <MapPin className="w-4 h-4" />,
+    tags: ["Maps", "Integration"],
   },
   {
     title: "Map Variant",
     description: "Alternative map implementation with different features and styling.",
     path: "/map2",
-    icon: <MapPin className="w-6 h-6" />,
-    tags: ["Maps", "UI Variants"],
+    icon: <MapPin className="w-4 h-4" />,
+    tags: ["Maps", "Variants"],
   },
   {
-    title: "Material UI Showcase",
+    title: "Material UI",
     description: "Material Design components and patterns using Material-UI library.",
     path: "/material_UI",
-    icon: <Palette className="w-6 h-6" />,
-    tags: ["Material UI", "Design System"],
+    icon: <Palette className="w-4 h-4" />,
+    tags: ["Material UI"],
   },
   {
     title: "Motion Advanced",
-    description: "Advanced Framer Motion patterns including expanding search, notification badges, animated drawers, and staggered grids.",
+    description: "Advanced Framer Motion patterns: search, badges, drawers, staggered grids.",
     path: "/motion-advanced",
-    icon: <Lightbulb className="w-6 h-6" />,
-    tags: ["Framer Motion", "Animation Patterns", "Advanced"],
+    icon: <Lightbulb className="w-4 h-4" />,
+    tags: ["Framer Motion", "Advanced"],
     featured: true,
   },
   {
     title: "Motion Learning",
-    description: "Educational examples of Framer Motion basics. Learn core animation concepts with practical examples.",
+    description: "Educational Framer Motion basics with practical examples.",
     path: "/motion-learning",
-    icon: <Layers className="w-6 h-6" />,
-    tags: ["Framer Motion", "Learning", "Tutorials"],
+    icon: <Layers className="w-4 h-4" />,
+    tags: ["Framer Motion"],
   },
   {
     title: "Offer Page",
-    description: "E-commerce style offer page with card layouts and product presentation.",
+    description: "E-commerce style offer page with card layouts.",
     path: "/Offerpage",
-    icon: <ShoppingBag className="w-6 h-6" />,
-    tags: ["E-commerce", "Layout", "Cards"],
+    icon: <ShoppingBag className="w-4 h-4" />,
+    tags: ["E-commerce", "Cards"],
   },
   {
     title: "Pagination",
-    description: "Pagination component implementation with page navigation and data handling.",
+    description: "Pagination component with page navigation and data handling.",
     path: "/pagination",
-    icon: <ListOrdered className="w-6 h-6" />,
-    tags: ["Components", "Data Display"],
+    icon: <ListOrdered className="w-4 h-4" />,
+    tags: ["Components"],
   },
   {
     title: "Responsive Chart",
-    description: "Data visualization with responsive chart components. Great for dashboards and analytics.",
+    description: "Data visualization with responsive chart components.",
     path: "/responsive_chart",
-    icon: <TrendingUp className="w-6 h-6" />,
-    tags: ["Charts", "Data Visualization", "Responsive"],
+    icon: <TrendingUp className="w-4 h-4" />,
+    tags: ["Charts", "Data Viz"],
     featured: true,
   },
   {
-    title: "Sidebar Navigation",
-    description: "Reusable sidebar navigation component with collapsible menu items.",
+    title: "Sidebar Nav",
+    description: "Reusable sidebar navigation with collapsible menu items.",
     path: "/sidebar",
-    icon: <Sidebar className="w-6 h-6" />,
-    tags: ["Navigation", "Components", "UI"],
+    icon: <Sidebar className="w-4 h-4" />,
+    tags: ["Navigation", "UI"],
   },
   {
     title: "Sign In",
-    description: "Modern authentication UI with gradient design and carousel elements.",
+    description: "Modern authentication UI with gradient design.",
     path: "/SignIn",
-    icon: <LogIn className="w-6 h-6" />,
-    tags: ["Authentication", "Design", "Forms"],
+    icon: <LogIn className="w-4 h-4" />,
+    tags: ["Auth", "Forms"],
   },
   {
     title: "Sign In Variant",
-    description: "Alternative sign-in page design with different layout and styling approach.",
+    description: "Alternative sign-in page with different layout approach.",
     path: "/SignIn2",
-    icon: <LogIn className="w-6 h-6" />,
-    tags: ["Authentication", "UI Design"],
+    icon: <LogIn className="w-4 h-4" />,
+    tags: ["Auth", "Design"],
   },
   {
     title: "Test Page",
-    description: "Experimental testing page for trying out new components and features.",
+    description: "Experimental page for trying new components and features.",
     path: "/test",
-    icon: <CheckSquare className="w-6 h-6" />,
-    tags: ["Testing", "Experimental"],
+    icon: <CheckSquare className="w-4 h-4" />,
+    tags: ["Experimental"],
   },
   {
-    title: "TMV-BD Landing Page",
-    description: "Full-featured landing page with dark mode toggle, responsive navigation, and product showcase. Production-ready design.",
+    title: "TMV-BD Landing",
+    description: "Full landing page with dark mode toggle and responsive nav.",
     path: "/tmv-bd",
-    icon: <Grid3x3 className="w-6 h-6" />,
-    tags: ["Landing Page", "Dark Mode", "Full Page", "Production"],
+    icon: <Grid3x3 className="w-4 h-4" />,
+    tags: ["Landing Page", "Dark Mode"],
     featured: true,
   },
   {
     title: "Toast Notifications",
-    description: "Toast notification system implementation for user feedback and alerts.",
+    description: "Toast notification system for user feedback and alerts.",
     path: "/toast_demo",
-    icon: <Bell className="w-6 h-6" />,
-    tags: ["Notifications", "UI Feedback"],
+    icon: <Bell className="w-4 h-4" />,
+    tags: ["Notifications"],
   },
 ];
 
 export default function Showcase() {
-  const featuredProjects = projects.filter((p) => p.featured);
-  const regularProjects = projects.filter((p) => !p.featured);
+  const [modalProject, setModalProject] = useState<Project | null>(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.05, delayChildren: 0.1 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
+    hidden: { opacity: 0, y: 16 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
   };
 
+  const openModal = useCallback((project: Project) => setModalProject(project), []);
+  const closeModal = useCallback(() => setModalProject(null), []);
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 py-12 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Internship Practice Projects
-          </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            A comprehensive collection of frontend projects exploring modern web technologies including React, Next.js, Framer Motion, Tailwind CSS, and more.
-          </p>
-        </motion.div>
-
-        {/* Featured Projects */}
-        {featuredProjects.length > 0 && (
-          <div className="mb-16">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-8"
-            >
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <Sparkles className="w-8 h-8 text-yellow-500" />
-                Featured Projects
-              </h2>
-              <p className="text-slate-600 dark:text-slate-400 mt-2">
-                Highlight of key projects showcasing advanced implementations
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {featuredProjects.map((project) => (
-                <ProjectCard key={project.path} project={project} variants={itemVariants} />
-              ))}
-            </motion.div>
-          </div>
-        )}
-
-        {/* All Projects */}
+    <main className="min-h-screen bg-slate-950 py-8 px-4 md:px-6">
+      {/* Compact Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="flex items-center justify-between mb-8"
+      >
         <div>
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-8"
-          >
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">All Projects</h2>
-            <p className="text-slate-600 dark:text-slate-400 mt-2">
-              Complete collection of all practice projects
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {regularProjects.map((project) => (
-              <ProjectCard key={project.path} project={project} variants={itemVariants} />
-            ))}
-          </motion.div>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent leading-tight">
+            Internship Projects
+          </h1>
+          <p className="text-xs text-slate-400 mt-0.5">
+            {projects.length} projects · hover to preview · click to open
+          </p>
         </div>
+        <div className="flex items-center gap-3 text-xs text-slate-500">
+          <span className="flex items-center gap-1">
+            <span className="w-2 h-2 rounded-full bg-yellow-400 inline-block" />
+            Featured
+          </span>
+          <span className="flex items-center gap-1">
+            <Eye className="w-3 h-3" />
+            Live preview
+          </span>
+        </div>
+      </motion.div>
 
-        {/* Summary Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-16 bg-white dark:bg-slate-900 rounded-lg shadow-lg p-8 border border-slate-200 dark:border-slate-800"
-        >
-          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-            Project Statistics
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <StatCard label="Total Projects" value={projects.length} />
-            <StatCard label="Featured" value={featuredProjects.length} />
-            <StatCard label="Technologies" value="10+" />
-            <StatCard label="Component Patterns" value="20+" />
-          </div>
+      {/* 4-column grid — full width */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+      >
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.path}
+            project={project}
+            variants={itemVariants}
+            onPreview={openModal}
+          />
+        ))}
+      </motion.div>
 
-          <div className="mt-8">
-            <h4 className="font-semibold text-slate-900 dark:text-white mb-4">Technologies Used:</h4>
-            <div className="flex flex-wrap gap-2">
-              {[
-                "React",
-                "Next.js",
-                "TypeScript",
-                "Tailwind CSS",
-                "Framer Motion",
-                "shadcn/ui",
-                "Material UI",
-                "Lucide Icons",
-                "Authentication",
-                "Responsive Design",
-              ].map((tech) => (
-                <span
-                  key={tech}
-                  className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full text-sm font-medium"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </div>
+      {/* Full-Screen Preview Modal */}
+      <AnimatePresence>
+        {modalProject && (
+          <motion.div
+            key="modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6"
+            style={{ backgroundColor: "rgba(0,0,0,0.82)", backdropFilter: "blur(8px)" }}
+            onClick={closeModal}
+          >
+            <motion.div
+              key="modal-content"
+              initial={{ opacity: 0, scale: 0.93, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.93, y: 16 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              className="relative w-full max-w-7xl h-[90vh] bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-2xl flex flex-col border border-slate-700"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal chrome bar */}
+              <div className="flex items-center justify-between px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 flex-shrink-0">
+                <div className="flex items-center gap-3">
+                  <div className="flex gap-1.5">
+                    <span className="w-3 h-3 rounded-full bg-red-400" />
+                    <span className="w-3 h-3 rounded-full bg-yellow-400" />
+                    <span className="w-3 h-3 rounded-full bg-green-400" />
+                  </div>
+                  <div className="flex items-center bg-white dark:bg-slate-700 rounded-md px-3 py-1 text-xs text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-600 min-w-[220px]">
+                    <span className="truncate">localhost:3000{modalProject.path}</span>
+                  </div>
+                  <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">
+                    {modalProject.title}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Link href={modalProject.path} target="_blank">
+                    <Button variant="outline" size="sm" className="gap-1 text-xs h-7 px-2.5">
+                      <ExternalLink className="w-3 h-3" />
+                      Open
+                    </Button>
+                  </Link>
+                  <button
+                    onClick={closeModal}
+                    className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-500"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+              {/* iframe */}
+              <div className="flex-1 relative bg-white">
+                <iframe
+                  src={modalProject.path}
+                  className="w-full h-full border-0"
+                  title={`Preview of ${modalProject.title}`}
+                  loading="lazy"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
@@ -326,65 +317,99 @@ export default function Showcase() {
 function ProjectCard({
   project,
   variants,
+  onPreview,
 }: {
   project: Project;
   variants: any;
+  onPreview: (project: Project) => void;
 }) {
-  return (
-    <motion.div variants={variants}>
-      <Link href={project.path}>
-        <Card className="h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500">
-          <CardHeader>
-            <div className="flex items-start justify-between mb-2">
-              <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg text-blue-600 dark:text-blue-400">
-                {project.icon}
-              </div>
-              {project.featured && (
-                <span className="px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs font-semibold rounded-full">
-                  Featured
-                </span>
-              )}
-            </div>
-            <CardTitle className="text-lg">{project.title}</CardTitle>
-            <CardDescription className="text-sm line-clamp-2">
-              {project.description}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs rounded"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <Button
-              variant="ghost"
-              className="w-full justify-between group hover:bg-blue-50 dark:hover:bg-blue-950"
-            >
-              View Project
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </CardContent>
-        </Card>
-      </Link>
-    </motion.div>
-  );
-}
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
-function StatCard({ label, value }: { label: string; value: number | string }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-      className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-lg p-4 border border-blue-200 dark:border-blue-800"
-    >
-      <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">{value}</p>
-      <p className="text-sm text-slate-600 dark:text-slate-400">{label}</p>
+    <motion.div variants={variants} className="flex flex-col h-full">
+      <div className="h-full flex flex-col rounded-xl overflow-hidden border border-slate-800 bg-slate-900 hover:border-blue-500/60 transition-all duration-300 hover:shadow-lg hover:shadow-blue-900/20 group">
+
+        {/* ── Large live preview thumbnail ── */}
+        <div
+          className="relative w-full overflow-hidden bg-slate-800 flex-shrink-0"
+          style={{ height: "260px" }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          {/* Scaled iframe — fills the full thumbnail area */}
+          <div
+            className="absolute top-0 left-0 pointer-events-none"
+            style={{
+              width: "calc(100% / 0.38)",
+              height: "calc(100% / 0.38)",
+              transform: "scale(0.38)",
+              transformOrigin: "top left",
+            }}
+          >
+            <iframe
+              src={project.path}
+              className="w-full h-full border-0 bg-white"
+              title={project.title}
+              loading="lazy"
+              onLoad={() => setIframeLoaded(true)}
+              tabIndex={-1}
+              aria-hidden="true"
+            />
+          </div>
+
+          {/* Shimmer while loading */}
+          {!iframeLoaded && (
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 animate-pulse" />
+          )}
+
+          {/* Hover overlay */}
+          <div
+            className={`absolute inset-0 flex items-center justify-center gap-2 transition-all duration-250 ${
+              hovered ? "opacity-100 bg-black/50 backdrop-blur-[2px]" : "opacity-0"
+            }`}
+          >
+            <button
+              onClick={() => onPreview(project)}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-white text-slate-900 text-xs font-semibold rounded-lg shadow-lg hover:scale-105 active:scale-95 transition-transform"
+            >
+              <Maximize2 className="w-3.5 h-3.5" />
+              Full Preview
+            </button>
+            <Link href={project.path}>
+              <span className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-xs font-semibold rounded-lg shadow-lg hover:scale-105 active:scale-95 transition-transform">
+                <ArrowRight className="w-3.5 h-3.5" />
+                Open
+              </span>
+            </Link>
+          </div>
+
+          {/* Featured badge */}
+          {project.featured && (
+            <span className="absolute top-2 left-2 px-1.5 py-0.5 bg-yellow-400/90 text-yellow-900 text-[10px] font-bold rounded shadow">
+              ★ Featured
+            </span>
+          )}
+        </div>
+
+        {/* ── Minimal info strip ── */}
+        <div className="px-3 py-2.5 flex items-center justify-between gap-2 flex-shrink-0">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="text-blue-400 flex-shrink-0">{project.icon}</span>
+            <span className="text-sm font-medium text-slate-100 truncate">{project.title}</span>
+          </div>
+          <div className="flex gap-1 flex-shrink-0">
+            {project.tags.slice(0, 1).map((tag) => (
+              <span
+                key={tag}
+                className="px-1.5 py-0.5 bg-slate-800 text-slate-400 text-[10px] rounded border border-slate-700"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 }
